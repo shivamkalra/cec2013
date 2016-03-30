@@ -1,6 +1,4 @@
 import numpy as np
-from numpy import sin, pi, exp, log, multiply, cos, array as nparray, \
-    sum as npsum
 
 
 def five_uneven_peak_trap(x):
@@ -39,39 +37,34 @@ def five_uneven_peak_trap(x):
 
 
 def equal_maxima(x):
-
-    return sin(5 * pi * x)**6
+    return np.sin(5 * np.pi * x)**6
 
 
 def uneven_decreasing_maxima(x):
-
-    return exp(-2 * log(2) * ((x - 0.08) / 0.854)**2) \
-        * sin(5 * pi * (x**0.75 - 0.05))**6
+    return np.exp(-2 * np.log(2) * ((x - 0.08) / 0.854)**2) \
+        * np.sin(5 * np.pi * (x**0.75 - 0.05))**6
 
 
 def himmelblau(x):
-
     return 200 - (x[0]**2 + x[1] - 11)**2 \
         - (x[0] + x[1]**2 - 7)**2
 
 
 def six_hump_camel_back(x):
-    return -((4 - 2.1*x[0]**2 + (x[0]**4)/3) *
-             x[0]**2 + x[0]*x[1] + (4*x[1]**2 - 4)*x[1]**2)
+    return -((4 - 2.1 * x[0]**2 + (x[0]**4) / 3) * x[0]**2 + x[0] * x[1] +
+             (4 * x[1]**2 - 4) * x[1]**2)
 
 
 def shubert(x):
-
-    j = nparray(range(1, 6))
-    return -multiply.reduce([sum(j * cos((j+1)*xx + j)) for xx in x])
+    j = np.asarray(range(1, 6))
+    return -np.multiply.reduce([sum(j * np.cos((j + 1) * xx + j)) for xx in x])
 
 
 def vincent(x):
-    return sum(sin(10*log(x)))/len(x)
+    return sum(np.sin(10 * np.log(x))) / len(x)
 
 
 def modified_rastrigin_all(x):
-
     MMP = 0
     dmap = {2: [3, 4],
             8: [1, 2, 1, 2, 1, 3, 1, 4],
@@ -80,46 +73,47 @@ def modified_rastrigin_all(x):
     if d in dmap:
         MMP = dmap[d]
 
-    MMP = nparray(MMP)
-    return -sum(10 + 9*cos(2*pi*MMP*x))
+    MMP = np.asarray(MMP)
+    return -sum(10 + 9 * np.cos(2 * np.pi * MMP * x))
 
 
 def sphere(x):
     # Please notice there is no use to rotate a sphere function, with rotation
-    # here just for a similar structure as other functions and easy programming
-    return npsum(x**2)
+    # here just for a similar structure as other functions and easy
+    # programming
+    return np.sum(x**2)
 
 
 def griewank(x):
     d = len(x)
-    m = multiply.reduce(cos(x/np.sqrt(range(1, d+1))))
-    s = sum(x**2/4000.0)
+    m = np.multiply.reduce(np.cos(x / np.sqrt(range(1, d + 1))))
+    s = sum(x**2 / 4000.0)
     return 1.0 + s - m
 
 
 def rastrigin(x):
-    return np.sum(x**2 - 10*cos(2*pi*x) + 10.0)
+    return np.sum(x**2 - 10 * np.cos(2 * np.pi * x) + 10.0)
 
 
 def _w(v, c1, c2):
-    return sum(c1 * cos(c2*v))
+    return sum(c1 * np.cos(c2 * v))
 
 
 def weierstrass(x):
     x = x + 0.5
     a, b, kmax = 0.5, 3.0, 20
 
-    seq = np.array(range(kmax+1))
+    seq = np.array(range(kmax + 1))
     c1 = a**seq
-    c2 = 2.0*pi*(b**seq)
-    return sum([_w(e, c1, c2) for e in x]) - _w(0.5, c1, c2)*len(x)
+    c2 = 2.0 * np.pi * (b**seq)
+    return sum([_w(e, c1, c2) for e in x]) - _w(0.5, c1, c2) * len(x)
 
 
 def ef8f2(xx):
     l = len(xx)
     x = 1 + xx
-    y = 1 + np.insert(xx[1:l], l-1, xx[0])
+    y = 1 + np.insert(xx[1:l], l - 1, xx[0])
 
-    f2 = 100.0*(x*x - y)**2 + (1.0 - x)**2
-    f = 1.0 + ((f2**2)/4000.0 - cos(f2))
+    f2 = 100.0 * (x * x - y)**2 + (1.0 - x)**2
+    f = 1.0 + ((f2**2) / 4000.0 - np.cos(f2))
     return sum(f)

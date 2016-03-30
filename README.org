@@ -1,0 +1,23 @@
+* About
+
+~python~ implementation of /Benchmark Functions for CEC'2013 Special Session/
+/and Competition on Niching Methods for Multimodal Function Optimization/.
+
+Original repository containing other versions is: [[https://github.com/mikeagn/CEC2013][here]]
+
+
+* Install
+ 
+#+BEGIN_SRC bash
+  python setup.py install
+#+END_SRC
+
+* Usage
+
+#+BEGIN_SRC python
+  import cec2013_mmop as cec
+
+  # Function takes function number (1, 2, 3) not 0
+  b = cec.get_benchmark(11)
+  b.evaluate([1., 0.2])
+#+END_SRC
